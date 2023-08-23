@@ -8,11 +8,10 @@ export default async (
   next: express.NextFunction
 ) => {
   try {
-    const { ...news } = req.body;
-
+    const { filter, query } = req.params;
     const newsService = new NewsService();
 
-    const result = await newsService.saveNews({ news });
+    const result = await newsService.getFilterAndSearchNews({ filter, query });
 
     return res.apiResponse(result);
   } catch (error) {
